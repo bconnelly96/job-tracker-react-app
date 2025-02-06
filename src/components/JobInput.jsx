@@ -1,11 +1,12 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import postCallHook from "../hooks/postCallHook.js";
+import axios from "axios";
 
 const JobInput = () => {
     const [inputVals, setInputVals] = useState({});
 
     const onButtonClick = () => {
-        console.log(inputVals);
+        //console.log(inputVals);
 
         if (!inputVals.title_input || !inputVals.company_input || !inputVals.status_input || !inputVals.date_applied_input) {
             alert("Missing data values. Must include Job Title, Company, Status, and Date Applied to add a job to job list.");
@@ -27,24 +28,29 @@ const JobInput = () => {
                     }
                 }
             };
-            const {status, loading, error} = postCallHook(jobsUrl, params);
-
-            if (error) {
-                alert(error)
-            }
-
-            if (status === 200) {
-                setInputVals(
-                    {
-                        title_input: "",
-                        company_input: "",
-                        status_input: "",
-                        date_applied_input: "",
-                        date_changed_input: "",
-                        link_input: ""
+            const postData = async() => {
+                try {
+                    const response = await axios.post(jobsUrl, params);
+                    console.log(response.status);
+                    if (response.status === 200) {
+                        setInputVals(
+                            {
+                                title_input: "",
+                                company_input: "",
+                                status_input: "",
+                                date_applied_input: "",
+                                date_changed_input: "",
+                                link_input: ""
+                            }
+                        );
+                    } else {
+                        alert(`Job was not added successfully. HTTP status code: ${response.status}`);
                     }
-                );
-            }
+                } catch(error) {
+                    console.log(error)
+                }
+            };
+            postData();
         }
 
     };
