@@ -1,4 +1,5 @@
 import getCallHook from "../hooks/getCallHook.js";
+import "../style/JobTable.css";
 
 const JobTable = () => {
     const jobsUrl = "http://localhost:3000/jobs/";
@@ -22,8 +23,9 @@ const JobTable = () => {
 
     if (data) {
         return (
+            <div className="JobTable">
             <table>
-                <thead>
+                <thead >
                     <tr>
                         <th>Job Title</th>
                         <th>Company</th>
@@ -48,6 +50,7 @@ const JobTable = () => {
                     }
                 </tbody>
             </table>
+            </div>
         );
     }
 

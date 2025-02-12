@@ -1,0 +1,12 @@
+.JobInput {
+    align-content: center;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    background-color: blue;
+}
+
+.InputTableHead {
+    background-color: blueviolet;
+}

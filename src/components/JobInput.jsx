@@ -1,13 +1,11 @@
-import {useState, useEffect} from "react";
-import postCallHook from "../hooks/postCallHook.js";
+import {useState} from "react";
 import axios from "axios";
+import "../style/JobInput.css";
 
 const JobInput = () => {
     const [inputVals, setInputVals] = useState({});
 
     const onButtonClick = () => {
-        //console.log(inputVals);
-
         if (!inputVals.title_input || !inputVals.company_input || !inputVals.status_input || !inputVals.date_applied_input) {
             alert("Missing data values. Must include Job Title, Company, Status, and Date Applied to add a job to job list.");
         } else {
@@ -61,9 +59,10 @@ const JobInput = () => {
     }
 
     return(
+        <div className="JobInput">
         <table>
             <thead>
-                <tr>
+                <tr className = "InputTableHead">
                     <th>Job Title</th>
                     <th>Company</th>
                     <th>Status</th>
@@ -138,6 +137,7 @@ const JobInput = () => {
                 </tr>
             </tbody>
         </table>
+        </div>
     );
 };
 
