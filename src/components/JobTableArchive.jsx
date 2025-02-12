@@ -1,4 +1,4 @@
-
+import getCallHook from "../hooks/getCallHook_archive.js";
 import "../style/JobTable.css";
 
 const JobTable = () => {

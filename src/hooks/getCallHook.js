@@ -1,28 +1,25 @@
-import {useState, useEffect} from "react";
+import {useEffect} from "react";
+import useJobDataStore from "../JobDataStore.js";
 import axios from "axios";
 
 const getCallHook = (url, params) => {
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    
+    const setJobList = useJobDataStore((state) => state.setJobList);
+    //const getJobList = useJobDataStore((state) => state.getJobList);
+    const jobList = useJobDataStore((state) => state.jobList);
+
     useEffect(() => {
         const fetchData = async() => {
             try {
-                setLoading(true);
                 const response = await axios.get(url, params);
-                console.log(response.data);
-                setData(response.data);
-                setLoading(false);
-            } catch(error) {
-                setError("Error getting data");
-                setLoading(false);
+                //console.log('BRENDAN')
+                //console.log(response.data)
+                setJobList(response.data)
+            } catch (error) {
+                console.log(error)
             }
         };
         fetchData();
     }, []);
-
-    return {data, loading, error};
-};
-
+    return jobList;
+}
 export default getCallHook;
