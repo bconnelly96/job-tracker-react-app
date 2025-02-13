@@ -1,42 +1,57 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import {useState, useEffect} from 'react'
 import './index.css'
 import "./App.css";
-import getCallHook from "./hooks/getCallHook.js";
+import JobTable from "./components/JobTable.jsx";
+import JobInput from "./components/JobInput.jsx";
+import axios from "axios";
 
-function App() {
-    const jobsUrl = "http://localhost:3000/jobs/";
-    const params = {
-        headers: {
-            Accept: "application/json"
-        },
-        params: {
-            "tableName": "jobs"
-        }
-    };
+const jobsUrl = "http://localhost:3000/jobs/";
+const params = {
+    headers: {
+        Accept: "application/json"
+    },
+    params: {
+        "tableName": "jobs"
+    }
+};
 
-    const x = getCallHook(jobsUrl, params);
-    console.log('Connelly')
-    console.log(x)
+const App = () => {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    
+    useEffect(() => {
+        const fetchData = async() => {
+            try {
+                setLoading(true);
+                const response = await axios.get(jobsUrl, params);
+                setData(response.data);
+                setLoading(false);
+            } catch(error) {
+                setError("Error getting data");
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, []);
 
-    return <div className = "App">
-    </div>
-}
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
+    if (error) {
+        return <div>{error}</div>;
+    }
 
-createRoot(document.getElementById("root")).render(
-    <StrictMode>
-        <App/>
-    </StrictMode>
-)
+    if (data) {
+        console.log('BILLY')
+        return (
+            <div className ="App">
+                <JobTable jobData = {data}/>
+                <JobInput jobData = {data} setData = {setData}/>
+            </div>
+        )
+    }
+};
 
-
-
-//function App() {
-//  return (
-//    <div className="App">
-//      <JobTable/>
-//      <JobInput/>
-//    </div>
-//  )
-//}
+export default App;
