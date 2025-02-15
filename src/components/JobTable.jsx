@@ -1,6 +1,16 @@
 import "../style/JobTable.css";
+import {useContext} from "react";
+import {JobContext} from "../contexts/JobContext.jsx"
 
-const JobTable = ({jobData}) => {
+const JobTable = ({jobList}) => {
+    //const {jobList} = useContext(JobContext)
+
+    if (!jobList) {
+        return (
+            <div className="JobTable">Loading...</div>
+        )
+    }
+
     return (
         <div className="JobTable">
         <table>
@@ -16,7 +26,7 @@ const JobTable = ({jobData}) => {
             </thead>
             <tbody>
                 {
-                    jobData.map(job =>
+                    jobList.map(job =>
                         <tr>
                             <td>{job.title}</td>
                             <td>{job.company}</td>

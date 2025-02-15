@@ -1,8 +1,9 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext, createContext} from 'react'
 import './index.css'
 import "./App.css";
 import JobTable from "./components/JobTable.jsx";
 import JobInput from "./components/JobInput.jsx";
+import {JobContext, JobProvider} from "./contexts/JobContext.jsx"
 import axios from "axios";
 
 const jobsUrl = "http://localhost:3000/jobs/";
@@ -16,42 +17,28 @@ const params = {
 };
 
 const App = () => {
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    
-    useEffect(() => {
-        const fetchData = async() => {
-            try {
-                setLoading(true);
-                const response = await axios.get(jobsUrl, params);
-                setData(response.data);
-                setLoading(false);
-            } catch(error) {
-                setError("Error getting data");
-                setLoading(false);
-            }
-        };
-        fetchData();
-    }, []);
+    const {jobList, updateJobList} = useContext(JobContext);
+    const [updated, setUpdated] = useState(false);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>{error}</div>;
-    }
-
-    if (data) {
-        console.log('BILLY')
+    if (updated) {
+        console.log('brendan')
+        setUpdated(false)
         return (
-            <div className ="App">
-                <JobTable jobData = {data}/>
-                <JobInput jobData = {data} setData = {setData}/>
+            <div>
+                <JobTable jobList = {jobList}/>
+                <JobInput setUpdated = {setUpdated}/>
             </div>
         )
     }
+
+    return (
+        <div>
+            <JobTable jobList = {jobList}/>
+            <JobInput setUpdated = {setUpdated}/>
+        </div>
+    )
+
+
 };
 
 export default App;

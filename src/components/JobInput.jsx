@@ -1,9 +1,12 @@
-import {useState} from "react";
+import {useState, useContext} from "react";
 import axios from "axios";
 import "../style/JobInput.css";
+import {JobContext} from "../contexts/JobContext.jsx"
 
-const JobInput = ({jobData, setData}) => {
-    const [inputVals, setInputVals] = useState({jobData});
+const JobInput = ({ setUpdated}) => {
+    const {jobList, updateJobList} = useContext(JobContext);
+    const [inputVals, setInputVals] = useState(jobList);
+
     const onButtonClick = () => {
         if (!inputVals.title_input || !inputVals.company_input || !inputVals.status_input || !inputVals.date_applied_input) {
             alert("Missing data values. Must include Job Title, Company, Status, and Date Applied to add a job to job list.");
@@ -30,13 +33,10 @@ const JobInput = ({jobData, setData}) => {
                     const response = await axios.post(jobsUrl, params);
                     console.log(response.status);
                     if (response.status === 200) {
-                        console.log('Brendan')
-                        console.log(inputVals)
-                        console.log('Eoghan')
-                        jobData.push(inputVals)
-                        console.log(jobData)
-                        setData(jobData)
-                        console.log('Connelly')
+                        jobList.push(inputVals)
+                        console.log(jobList)
+                        updateJobList(jobList)
+                        setUpdated(true)
                         setInputVals(
                             {
                                 title_input: "",
