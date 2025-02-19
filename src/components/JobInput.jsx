@@ -10,37 +10,36 @@ const JobInput = ({ updateJobList }) => {
             alert("Missing data values. Must include Job Title, Company, Status, and Date Applied to add a job to job list.");
         } else {
             const jobsUrl = "http://localhost:3000/jobs/";
+            const tableData = {
+                "title": inputVals.title_input,
+                "company": inputVals.company_input,
+                "status": inputVals.status_input,
+                "date_applied": inputVals.date_applied_input,
+                "date_status_updated": inputVals.date_changed_input,
+                "job_link": inputVals.link_input
+            };
             const params = {
                 headers: {
                     Accept: "application/json"
                 },
                 params: {
                     "tableName": "jobs",
-                    "tableData": {
-                        "title": inputVals.title_input,
-                        "company": inputVals.company_input,
-                        "status": inputVals.status_input,
-                        "date_applied": inputVals.date_applied_input,
-                        "date_status_updated": inputVals.date_changed_input,
-                        "job_link": inputVals.link_input
-                    }
+                    "tableData": tableData
                 }
             };
+            
             const postData = async() => {
                 try {
                     const response = await axios.post(jobsUrl, params);
                     if (response.status === 200) {
-                        updateJobList(inputVals);
-                        setInputVals(
-                            {
-                                title_input: "",
-                                company_input: "",
-                                status_input: "",
-                                date_applied_input: "",
-                                date_changed_input: "",
-                                link_input: ""
-                            }
-                        );
+                        // Pass new job to Parent component
+                        updateJobList(tableData);
+
+                        var newInputVals = {};
+                        for (const [key, value] of Object.entries(inputVals)) {
+                            newInputVals[key] = "";
+                        }
+                        setInputVals(newInputVals);
                     } else {
                         alert(`Job was not added successfully. HTTP status code: ${response.status}`);
                     }

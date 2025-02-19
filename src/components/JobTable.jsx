@@ -35,5 +35,3 @@ const JobTable = ({ jobList }) => {
 };
 
 export default JobTable;
-//        const dateApplied = moment(job.date_applied).format("M-D-YYYY")
-//<td>{job.date_applied}</td>date_status_updated
