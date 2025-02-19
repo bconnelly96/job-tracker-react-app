@@ -48,7 +48,7 @@ const App = () => {
             }
         };
         fetchData();
-        }, []);
+    }, []);
     
     if (loading) {
         return (<div>Loading Job Data...</div>);

@@ -40,6 +40,7 @@ const DonutChart = ({ jobList }) => {
     const chartData = getChartData(jobList)
     return (
         <div className = "DonutChart">
+        <h2>Job Applications Statuses</h2>
         <ResponsivePie
         data={chartData}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
