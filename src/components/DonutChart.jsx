@@ -42,11 +42,6 @@ const DonutChart = ({ jobList }) => {
         <div className = "DonutChart">
         <ResponsivePie
         data={chartData}
-        theme={
-            {
-                fontSize: 16,
-            }
-        }
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
         innerRadius={0.5}
         padAngle={0.7}
