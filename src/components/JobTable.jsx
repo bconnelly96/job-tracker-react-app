@@ -1,4 +1,5 @@
 import "../style/JobTable.css";
+import moment from "moment";
 
 const JobTable = ({ jobList }) => {
     return (
@@ -21,8 +22,8 @@ const JobTable = ({ jobList }) => {
                             <td>{job.title}</td>
                             <td>{job.company}</td>
                             <td>{job.status}</td>
-                            <td>{job.date_applied}</td>
-                            <td>{job.date_status_updated}</td>
+                            <td>{moment(job.date_applied).format("M-D-YYYY")}</td>
+                            <td>{job.date_status_updated ? moment(job.date_status_updated).format("M-D-YYYY"): ""}</td>
                             <td>{job.job_link}</td>
                         </tr>
                     )
@@ -34,3 +35,5 @@ const JobTable = ({ jobList }) => {
 };
 
 export default JobTable;
+//        const dateApplied = moment(job.date_applied).format("M-D-YYYY")
+//<td>{job.date_applied}</td>date_status_updated
