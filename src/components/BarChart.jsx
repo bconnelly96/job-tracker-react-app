@@ -18,8 +18,7 @@ function getChartData(jobList) {
     for (const [key, value] of Object.entries(datesApplied)) {
         chartData.push({
             "Date Applied": key,
-            "Jobs Applied": value,
-            "Jobs AppliedColor": "hsl(345, 70%, 50%)"
+            "Jobs Applied": value
         });
     }
 
@@ -34,6 +33,22 @@ const BarChart = ({ jobList }) => {
         <div className = "BarChart">
             <ResponsiveBar
         data={chartData}
+        theme={
+            {
+                axis: {
+                    legend: {
+                        text: {
+                            fill: "#FFFFFF"
+                        }
+                    },
+                    ticks: {
+                        text: {
+                            fill: "#FFFFFF"
+                        }
+                    }
+                }
+            }
+        }
         keys={[
             "Jobs Applied"
         ]}
@@ -42,16 +57,8 @@ const BarChart = ({ jobList }) => {
         padding={0.3}
         valueScale={{ type: "linear" }}
         indexScale={{ type: "band", round: true }}
-        colors={{ scheme: "nivo" }}
-        borderColor={{
-            from: "color",
-            modifiers: [
-                [
-                    "darker",
-                    1.6
-                ]
-            ]
-        }}
+        colors={["#6C809A"]}
+        colorBy="index"
         axisTop={null}
         axisRight={null}
         axisBottom={{
@@ -74,15 +81,7 @@ const BarChart = ({ jobList }) => {
         }}
         labelSkipWidth={12}
         labelSkipHeight={12}
-        labelTextColor={{
-            from: "color",
-            modifiers: [
-                [
-                    "darker",
-                    1.6
-                ]
-            ]
-        }}
+        labelTextColor="#FFFFFF"
         legends={[
             {
                 dataFrom: "keys",
@@ -96,6 +95,7 @@ const BarChart = ({ jobList }) => {
                 itemHeight: 20,
                 itemDirection: "left-to-right",
                 itemOpacity: 0.85,
+                itemTextColor: "#FFFFFF",
                 symbolSize: 20,
                 effects: [
                     {

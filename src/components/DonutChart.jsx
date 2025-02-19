@@ -20,20 +20,17 @@ function getChartData(jobList) {
         {
             "id": "Applied",
             "label": "Applied",
-            "value": appliedItems,
-            "color": "hsl(282, 15.20%, 29.60%)"
+            "value": appliedItems
         },
         {
             "id": "Rejected",
             "label": "Rejected",
-            "value": rejectedItems,
-            "color": "hsl(150, 63.10%, 47.80%)"
+            "value": rejectedItems
         },
         {
             "id": "Interview",
             "label": "Interview",
-            "value": interviewItems,
-            "color": "hsl(39, 70.20%, 50.00%)"
+            "value": interviewItems
         }
     ];
     return chartData;
@@ -43,37 +40,27 @@ const DonutChart = ({ jobList }) => {
     const chartData = getChartData(jobList)
     return (
         <div className = "DonutChart">
-        <ResponsivePie 
+        <ResponsivePie
         data={chartData}
+        theme={
+            {
+                fontSize: 16,
+            }
+        }
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
         innerRadius={0.5}
         padAngle={0.7}
         cornerRadius={3}
         activeOuterRadiusOffset={8}
+        colors={["#666b70", "#6C809A", "#F2D1C9"]}
+        colorBy="index"
         borderWidth={1}
-        borderColor={{
-            from: "color",
-            modifiers: [
-                [
-                    "darker",
-                    0.2
-                ]
-            ]
-        }}
         arcLinkLabelsSkipAngle={10}
-        arcLinkLabelsTextColor="#333333"
+        arcLinkLabelsTextColor="#FFFFFF"
         arcLinkLabelsThickness={2}
         arcLinkLabelsColor={{ from: "color" }}
         arcLabelsSkipAngle={10}
-        arcLabelsTextColor={{
-            from: "color",
-            modifiers: [
-                [
-                    "darker",
-                    2
-                ]
-            ]
-        }}
+        arcLabelsTextColor="#FFFFFF"
         legends={[
             {
                 anchor: "bottom",
@@ -84,7 +71,7 @@ const DonutChart = ({ jobList }) => {
                 itemsSpacing: 0,
                 itemWidth: 100,
                 itemHeight: 18,
-                itemTextColor: "#999",
+                itemTextColor: "#FFFFFF",
                 itemDirection: "left-to-right",
                 itemOpacity: 1,
                 symbolSize: 18,

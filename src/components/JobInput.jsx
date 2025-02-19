@@ -62,7 +62,7 @@ const JobInput = ({ updateJobList }) => {
         <div className="JobInput">
         <table>
             <thead>
-                <tr className = "InputTableHead">
+                <tr>
                     <th>Job Title</th>
                     <th>Company</th>
                     <th>Status</th>
