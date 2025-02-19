@@ -1,11 +1,9 @@
-import {useState, useContext} from "react";
+import { useState } from "react";
 import axios from "axios";
 import "../style/JobInput.css";
-import {JobContext} from "../contexts/JobContext.jsx"
 
-const JobInput = ({ setUpdated}) => {
-    const {jobList, updateJobList} = useContext(JobContext);
-    const [inputVals, setInputVals] = useState(jobList);
+const JobInput = ({ updateJobList }) => {
+    const [inputVals, setInputVals] = useState([]);
 
     const onButtonClick = () => {
         if (!inputVals.title_input || !inputVals.company_input || !inputVals.status_input || !inputVals.date_applied_input) {
@@ -31,12 +29,8 @@ const JobInput = ({ setUpdated}) => {
             const postData = async() => {
                 try {
                     const response = await axios.post(jobsUrl, params);
-                    console.log(response.status);
                     if (response.status === 200) {
-                        jobList.push(inputVals)
-                        console.log(jobList)
-                        updateJobList(jobList)
-                        setUpdated(true)
+                        updateJobList(inputVals);
                         setInputVals(
                             {
                                 title_input: "",
@@ -51,7 +45,7 @@ const JobInput = ({ setUpdated}) => {
                         alert(`Job was not added successfully. HTTP status code: ${response.status}`);
                     }
                 } catch(error) {
-                    console.log(error)
+                    console.log(error);
                 }
             };
             postData();

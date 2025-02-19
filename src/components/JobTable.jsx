@@ -1,16 +1,6 @@
 import "../style/JobTable.css";
-import {useContext} from "react";
-import {JobContext} from "../contexts/JobContext.jsx"
 
-const JobTable = ({jobList}) => {
-    //const {jobList} = useContext(JobContext)
-
-    if (!jobList) {
-        return (
-            <div className="JobTable">Loading...</div>
-        )
-    }
-
+const JobTable = ({ jobList }) => {
     return (
         <div className="JobTable">
         <table>
