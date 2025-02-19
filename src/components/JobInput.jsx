@@ -1,9 +1,9 @@
-import {useState} from "react";
+import { useState } from "react";
 import axios from "axios";
 import "../style/JobInput.css";
 
-const JobInput = () => {
-    const [inputVals, setInputVals] = useState({});
+const JobInput = ({ updateJobList }) => {
+    const [inputVals, setInputVals] = useState([]);
 
     const onButtonClick = () => {
         if (!inputVals.title_input || !inputVals.company_input || !inputVals.status_input || !inputVals.date_applied_input) {
@@ -29,8 +29,8 @@ const JobInput = () => {
             const postData = async() => {
                 try {
                     const response = await axios.post(jobsUrl, params);
-                    console.log(response.status);
                     if (response.status === 200) {
+                        updateJobList(inputVals);
                         setInputVals(
                             {
                                 title_input: "",
@@ -45,7 +45,7 @@ const JobInput = () => {
                         alert(`Job was not added successfully. HTTP status code: ${response.status}`);
                     }
                 } catch(error) {
-                    console.log(error)
+                    console.log(error);
                 }
             };
             postData();
@@ -62,7 +62,7 @@ const JobInput = () => {
         <div className="JobInput">
         <table>
             <thead>
-                <tr className = "InputTableHead">
+                <tr>
                     <th>Job Title</th>
                     <th>Company</th>
                     <th>Status</th>
@@ -133,7 +133,9 @@ const JobInput = () => {
                             value={inputVals.link_input}
                         />
                     </td>
+                    <td>
                     <button type="button" onClick={onButtonClick}>Add Job</button> 
+                    </td>
                 </tr>
             </tbody>
         </table>

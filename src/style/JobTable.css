@@ -1,21 +1,16 @@
 .JobTable {
     width: 100%;
-    tr:nth-child(even) {background-color: #E0EEC6;};
+    tr:nth-child(even) {background-color: #666b70};
+    color: white;
   }
   
-  th {
+  .JobTable th {
     text-align: center;
-    background-color: #7CA982;
+    background-color: #6C809A;
     padding: 10px;
   }
   
-  td {
+  .JobTable td {
     text-align: left;
     padding-right: 20px;
-  }
-  
-  .JobInput {
-    text-align: center;
-    width: auto;
-    align-content: center
   }

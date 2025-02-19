@@ -2,11 +2,21 @@
     align-content: center;
     width: 100%;
     text-align: center;
-    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     width: 100%;
-    background-color: blue;
+    color: white;
 }
 
-.InputTableHead {
-    background-color: blueviolet;
+.JobInput table,input {
+    width: 100%;
+}
+
+.JobInput th {
+    background-color: #6C809A;
+}
+
+.JobInput button {
+    background-color: #6C809A;
+    color: white;
 }
