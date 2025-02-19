@@ -22,6 +22,7 @@ function getChartData(jobList) {
         });
     }
 
+    chartData.sort((a,b) => moment(a["Date Applied"]).valueOf() - moment(b["Date Applied"]).valueOf())
     return chartData;
 }
 
@@ -31,7 +32,8 @@ const BarChart = ({ jobList }) => {
 
     return(
         <div className = "BarChart">
-            <ResponsiveBar
+        <h2>Jobs Applications by Date</h2>
+        <ResponsiveBar
         data={chartData}
         theme={
             {
